@@ -1,0 +1,327 @@
+@import url('https://fonts.googleapis.com/css2?family=Croissant+One&display=swap');
+
+h3 {
+    color: green;
+}
+
+ul {
+    border: 1px solid blue;
+    padding-left: 20px;
+    margin-right: 1480px;
+}
+
+li {
+    color: darkblue;
+}
+
+/* Classe */
+.Paragrafo {
+    background-color: #ed4c4c;
+    color: rgb(245, 248,83);
+    padding: 5px;
+}
+
+/* Id */
+#titulo_com_id {
+    background-color: green;
+    color: #ffffff;
+    padding: 10px;
+    font-size: 40px;
+}
+
+/* Regra de Ordem */
+h1 {
+    border-bottom: 2px solid blue;
+}
+
+.class_titulo {
+    border-bottom: 3px solid red;
+}
+#id_titulo {
+    border-bottom: 3px solid black;
+}
+
+/* Nome das cores */
+.color_name {
+    color: crimson;
+}
+
+/* Cores RGB */
+.rgb {
+    color: rgb(255,0,0);
+}
+.rgb_misturado {
+    color: rgb(199,21,47);
+}
+.rgba {
+    color: rgba(100, 99, 45, 0.3);
+}
+
+/* Hexadecimal */
+.hex {
+    color: #55a398;
+}
+
+.hex_simplificado {
+    color: #a6e;
+}
+
+/* HSL */
+.hsl {
+    color: hsl(100, 20%, 50%);
+}
+
+/* Background color */
+.backgroundcolor {
+    background-color: #000;
+    color: gold;
+}
+
+.bg_2 {
+    background-color: rgb(100,50,33);
+    color: #0fa;
+}
+
+/* Opacidade no Background Color */
+.bg_com_opacidade {
+    background-color: red;
+    opacity: 0.3;
+}
+
+/* Erro de opacidade na cor da letra */
+.bg_com_opacidade2 {
+    background-color: rgba(90, 100, 40, 0.2);
+    color: black;
+}
+
+/* Background Image */
+.bgimage {
+    background-image: url(../img/masp_sp.jfif);
+    color: red;
+    padding: 10px;
+    width: 265px;
+    /* margin-right: 1300px; */
+}
+
+/* Centralização Background Image */
+.bgimage_naocentral, .bgimage_central {
+    background-image: url(../img/senac_l13.jfif);
+    height: 150px;
+    width: 150px;
+}
+
+.bgimage_central {
+    background-position: center;
+    background-size: cover; /*the background image will always fit the whole div , you won't be left with any empty spots in your div*/
+}
+
+/* Altura e Largura */
+.altura_largura {
+    height: 500px;
+    width: 500px;
+    background-color: blueviolet;
+}
+
+.altura_largura_nova {
+    height: 200px;
+    background-color: #999;
+}
+
+/* Padding */
+.sem_padding {
+    background-color: aqua;
+    padding: none;
+    width: 200px;
+    height: 200px;
+}
+
+.com_padding {
+    background-color: violet;
+    width: 300px;
+    height: 300px;
+    padding: 10px; /*padding simples aplicado em "quadro", todos os lados são iguais com o mesmo padding*/
+}
+
+/* Padding por lados */
+.padding_lados {
+    background-color: crimson;
+    color: white;
+    padding-top: 10px;
+    padding-left: 150px;
+    padding-right: 5px;
+    padding-bottom: 40px;
+}
+
+/* Shorthand Properties / Propriedades Abreviadas */
+.shorthand_padding {
+    background-color: #333;
+    padding: 3px 12px 18px 24px; /*Sentido horário: top, left, bottom, right*/
+}
+
+.shorthand_padding2 {
+    background-color: #555;
+    padding: 10px 20px; /*os valores são replicados para os demais lados: 10px (top and bottom) e 20px (left and right)*/
+}
+
+/* Border */
+.border {
+    border: 5px solid blue;
+    padding: 10px;
+}
+
+.border2 {
+    border: 2px dotted rgb(236, 188, 27);
+    padding: 25px;
+}
+
+/* Borda individual por lados */
+.border_left {
+    background-color: rgb(240, 169, 63);
+    color: white;
+    padding: 25px;
+    border-left: 10px solid yellowgreen;
+}
+
+.border_bottom {
+    background-color: rgb(163, 138, 231);
+    color: white;
+    padding: 25px;
+    border-bottom: 15px double #548;
+}
+
+.border_right {
+    background-color: cornflowerblue;
+    color: pink;
+    padding: 10px;
+    border-right: 2px dashed pink;
+}
+
+.border_top {
+    background-color: aquamarine;
+    color: #808080;
+    padding: 10px;
+    border-top: 10px dotted red;
+}
+
+/* Borda diferente em todos os lados ao mesmo tempo */
+.border_whole {
+    background-color: black;
+    color: white;
+    padding: 25px;
+    border-top: 10px dotted salmon;
+    border-right: 10px solid yellow;
+    border-bottom: 10px dashed orange;
+    border-left: 10px double rosybrown;
+}
+
+/* Borda arredondada */
+.border_round {
+    background-color: burlywood;
+    color: white;
+    padding: 20px;
+    border: 5px solid red;
+    border-radius: 20px;
+}
+
+.border_round2 {
+    background-color: black;
+    color: white;
+    padding: 20px;
+    border-radius: 20px;
+}
+
+/* Margem */
+.margin {
+    background-color: darkblue;
+    color: yellow;
+    margin: 10px;
+}
+
+.margin_top {
+    background-color: dodgerblue;
+    padding: 10px;
+    margin-top: 70px;
+}
+
+.margin_diferenciada {
+    background-color: cornflowerblue;
+    margin: 7px 10px 9px 30px;
+}
+
+/* Alinhamento de Texto */
+.alinhamento_right {
+    text-align: right;
+}
+
+.centralizar_container {
+    border: 4px solid salmon;
+    width: 200px;
+    text-align: center;
+}
+
+/* Decoração de Texto */
+.underline {
+    text-decoration: underline;
+}
+
+.line_through {
+    text-decoration: line-through;
+}
+
+.orverline {
+    text-decoration: overline chocolate;
+}
+
+.remove_underline {
+    text-decoration: none;
+    color: #ed4c4c;
+}
+
+/* Fontes */
+.fonte_serif {
+    font-family: serif;
+}
+
+.fonte_sans_serif {
+    font-family: sans-serif;
+}
+
+.fonte_monospace {
+    font-family: monospace;
+}
+
+.fonte_cursive {
+    font-family: cursive;
+}
+
+.fonte_fantasy {
+    font-family: fantasy;
+}
+
+.outra_fonte {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Importanto fonte do Google = o "link/import" da fonte sempre deve estar no topo da página (linha 1) */
+.fonte_externa {
+    font-family: 'Croissant One';
+}
+
+/* Estilo de Fonte */
+.italica {
+    font-style: italic;
+}
+
+/* Espessura da Fonte */
+.bold {
+    font-weight: bold; /*Também pode ser usada uma espessura (weight/peso) de 100 até 900*/
+}
+
+/* Tamanho da Fonte */
+.tamanho_150px {
+    font-size: 150px;
+}
+
+.xx_small {
+    font-size: xx-small;
+}
