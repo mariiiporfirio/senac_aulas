@@ -1,19 +1,38 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="PT-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="./eventos/js/script.js"></script>
-    <title>Document</title>
+    <title>DOM</title>
+    <link rel="stylesheet" href="./dom/css/styles.css" />
+    <script src="./dom/js/script.js" defer></script>
 </head>
 <body>
+    <header>
+    <h1 id="titulo">Título</h1>
+    <nav>
+    <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Produtos</a></li>
+        <li><a href="#">Contato</a></li>
+    </ul>
+</nav>
+</header>
 
-    <h1>Eventos</h1>
-    <button id="meu-botao">Clica aqui!</button>
+<main id="main-container">
+    <div class="produtos">
+        <h1>Produto 1</h1>
+        <p>Descrição do Produto</p>
+    </div>
+    <div class="produtos"></div>
+        <h1>Produto 2</h1>
+        <p>Descrição do Produto</p>
+    </div>
+</main>
 
-    <h1> Pressione uma tecla!</h1>
-    <input type="text" id="inputField" placeholder="Clique aqui e pressione a tecla">
-    <div id="output"></div>
-    
+<footer>
+    <p>Rodapé</p>
+</footer>
+
 </body>
 </html>
