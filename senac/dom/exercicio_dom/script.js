@@ -9,6 +9,7 @@ navLinks.appendChild(li);
 const blog = document.createTextNode("Blog");
 const Blogh3 = document.createElement("h3");
 Blogh3.appendChild(blog);
+li.appendChild(blog);
 console.log(Blogh3);
 
 //criando um nó de texto
