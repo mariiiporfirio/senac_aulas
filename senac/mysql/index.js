@@ -35,6 +35,8 @@
 //     });
 // });
 
+//importando módulo do banco de dados
+var conexao = require("./conexaobanco");
 var express = require('express');
 var app = express();
 
@@ -44,8 +46,51 @@ app.use(bodyParser.json());// transforma os dados do input para o json (transfor
 
 app.use(bodyParser.urlencoded({extended:true}));// processa os dados que foram recebidos
 
+app.set('view engine', 'ejs');
+
 app.get('/', function(req, res) {
     res.sendFile(__dirname+'/cadastro.html');
 });
 
-app.listen(7000);
+app.post('/', function(req, res) {
+    var nomecompleto = req.body.nomecompleto;
+    var email = req.body.email;
+    var senha = req.body.senha;
+
+    conexao.connect(function(error) {
+        if(error) throw error;
+
+    //         var sql = "INSERT INTO estudante (nomecompleto, email, senha) VALUES('"+nomecompleto+" ',' "+email+" ',' "+senha+"')";
+
+    // conexao.query(sql, function(error, result) {
+    //     if(error) throw error;
+    //         res.send("Estudante cadastrado com sucesso!" +result.insertId);
+    //     });
+
+    //Previnindo SQL Injection
+    var sql = "INSERT INTO estudante (nomecompleto, email, senha) VALUES (?, ?, ?)";
+
+    conexao.query(sql, [nomecompleto, email, senha], function(error, result) {
+        if(error) throw error;
+        // res.send("Estudante cadastrado com sucesso!" +result.insertId);
+        res.redirect('/estudantes');
+    });
+   
+    });
+});
+
+app.get('/estudantes', function(req, res){
+    conexao.connect(function(error){
+        if (error) console.log(error);
+ 
+        var sql = "select * from estudante";
+        conexao.query(sql, function(error, result){
+            if(error) console.log(error);
+            // console.log(result); mostra no terminal o select feito
+
+            res.render("estudantes", {estudante:result});
+        })
+    })
+})
+ 
+app.listen(7070);
