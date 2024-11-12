@@ -1,96 +1,124 @@
-// //Chamando a biblioteca mysql
-// var mysql = require("mysql");
- 
-// //Conectando meu banco de dados
-// var conecteBanco = mysql.createConnection({
-//     host: "localhost",
-//     user: "root",
-//     password: "",
-//     database: "escola"
-// });
-
-// conecteBanco.connect(function(error){
-//     if(error) throw error;
-//     // console.log("O banco de dados foi conectado!");
-
-//     conecteBanco.query("select * from estudante", function(error, result) {
-//         if(error) throw error;
-//         console.log(result); // a execução sendo positiva, imprime todos os dados da tabala estudante
-//         console.log(result[0]); // apenas os dados da primeira posição
-//         console.log(result[0].nomecompleto); // escolhendo dados especificos dentro de uma posição
-//     });
-// });
-
-// var conexao = require("./conexaobanco");
-
-// conexao.connect(function(error){
-//     if(error) throw error;
-//     // console.log("O banco de dados foi conectado!");
-
-//     conexao.query("select * from estudante", function(error, result) {
-//         if(error) throw error;
-//         console.log(result); // a execução sendo positiva, imprime todos os dados da tabala estudante
-//         console.log(result[0]); // apenas os dados da primeira posição
-//         console.log(result[0].nomecompleto); // escolhendo dados especificos dentro de uma posição
-//     });
-// });
 
 //importando módulo do banco de dados
 var conexao = require("./conexaobanco");
+ 
 var express = require('express');
 var app = express();
-
+ 
 var bodyParser = require('body-parser');
-
-app.use(bodyParser.json());// transforma os dados do input para o json (transforma em objetos)
-
-app.use(bodyParser.urlencoded({extended:true}));// processa os dados que foram recebidos
-
+ 
+app.use(bodyParser.json());
+ 
+app.use(bodyParser.urlencoded({ extended:true }));
+ 
 app.set('view engine', 'ejs');
-
-app.get('/', function(req, res) {
-    res.sendFile(__dirname+'/cadastro.html');
+ 
+app.get('/', function(req, res){
+res.sendFile(__dirname+'/cadastro.html');
 });
 
-app.post('/', function(req, res) {
+ 
+//POST continuar
+app.post('/', function(req, res){
+   var nomecompleto = req.body.nomecompleto;
+   var email = req.body.email;
+   var senha = req.body.senha;
+ 
+   //Estou fazendo via Pool a conexão
+//   conexao.connect(function(error){
+//    if(error) throw error;
+ 
+/* var sql = "INSERT INTO estudante (nomecompleto, email, senha) VALUES(' "+nomecompleto+" ', ' "+email+" ', ' "+senha+" ')";
+ 
+conexao.query(sql, function(error, result){
+if(error) throw error;
+   res.send("Estudante cadastrado com sucesso!"+result.insertId);        
+}); */
+ 
+ 
+//previnindo SQL Injection
+var sql = "INSERT INTO estudante (nomecompleto, email, senha) VALUES (?, ?, ?)";
+ 
+    conexao.query(sql, [nomecompleto, email, senha], function(error, result){
+        if(error) throw error;
+        //res.send("Estudante cadastrado com sucesso! " +result.insertId);
+        res.redirect('/estudantes');
+    });
+ 
+});
+ 
+ 
+//READ do banco de dados
+app.get('/estudantes', function(req, res){
+ 
+    //Executando via Pool
+ //conexao.connect(function(error){
+ //if(error) console.log(error);
+ 
+ var sql = "select * from estudante";
+ 
+    conexao.query(sql, function(error, result){
+        if(error) console.log(error);
+    // console.log(result); Mostra no terminal o select
+ 
+    res.render("estudantes", {estudante:result});
+    });
+
+ });
+
+ 
+ 
+//deletando dado do banco - Delete
+app.get('/delete-estudante', function(req, res){
+ 
+    //Executando via Pool
+//    conexao.connect(function(error){
+ //   if(error) console.log(error);
+ 
+    var sql = "delete from estudante where id=?";
+ 
+    var id = req.query.id;
+ 
+    conexao.query(sql, [id], function(error, result){
+         if(error) console.log(error);
+         res.redirect('/estudantes');
+    });
+    
+});
+
+
+//Update - alterando dados no banco de dados
+app.get('/update-estudante', function(req, res) {
+    var sql = "select * from estudante where id=?";
+    var id = req.query.id;
+
+    conexao.query(sql, [id], function(error, result){
+        if(error) console.log(error);
+            if(result && result.length > 0) {
+                res.render("alterar_estudantes", {estudante: result[0]});
+            } else {
+            res.status(404).send('Estudante não encontrado');
+        }
+   });
+
+});
+
+
+//Uptade - Método Post para enviar o dado alterado para o Banco de Dados
+app.post('/update-estudante', function(req, res) {
     var nomecompleto = req.body.nomecompleto;
     var email = req.body.email;
     var senha = req.body.senha;
+    var id = req.body.id;
 
-    conexao.connect(function(error) {
-        if(error) throw error;
+    var sql = "update estudante set nomecompleto=?, email=?, senha=? where id=?";
 
-    //         var sql = "INSERT INTO estudante (nomecompleto, email, senha) VALUES('"+nomecompleto+" ',' "+email+" ',' "+senha+"')";
-
-    // conexao.query(sql, function(error, result) {
-    //     if(error) throw error;
-    //         res.send("Estudante cadastrado com sucesso!" +result.insertId);
-    //     });
-
-    //Previnindo SQL Injection
-    var sql = "INSERT INTO estudante (nomecompleto, email, senha) VALUES (?, ?, ?)";
-
-    conexao.query(sql, [nomecompleto, email, senha], function(error, result) {
-        if(error) throw error;
-        // res.send("Estudante cadastrado com sucesso!" +result.insertId);
+    conexao.query(sql, [nomecompleto, email, senha, id], function(error, result) {
+        if(error) console.log(error);
         res.redirect('/estudantes');
     });
-   
-    });
+
 });
 
-app.get('/estudantes', function(req, res){
-    conexao.connect(function(error){
-        if (error) console.log(error);
- 
-        var sql = "select * from estudante";
-        conexao.query(sql, function(error, result){
-            if(error) console.log(error);
-            // console.log(result); mostra no terminal o select feito
 
-            res.render("estudantes", {estudante:result});
-        })
-    })
-})
- 
-app.listen(7070);
+app.listen(3009);

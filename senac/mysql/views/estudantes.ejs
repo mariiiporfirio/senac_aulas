@@ -1,18 +1,24 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lista de Estudantes</title>
+
 </head>
+
 <body>
 
     <h1>LISTA DE ESTUDANTES:</h1>
+    
     <table border="1" width="100%">
         <tr>
             <th>Código</th>
             <th>Nome</th>
             <th>E-mail</th>
+            <th>Ação</th>
         </tr>
 
         <% if (estudante.length > 0) { %>
@@ -21,6 +27,8 @@
                     <td><%-estudante[i].id %></td>
                     <td><%-estudante[i].nomecompleto %></td>
                     <td><%-estudante[i].email %></td>
+                    <td><a href="/delete-estudante?id= <%- estudante[i].id %>">Excluir</a></td>
+                    <td><a href="/update-estudante?id= <%- estudante[i].id %>">Alterar</a></td>
                 </tr>
             <% } %>
 
@@ -31,4 +39,5 @@
     </table>
     
 </body>
+
 </html>
